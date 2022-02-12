@@ -1,0 +1,67 @@
+{
+  "root": true,
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "plugins": ["simple-import-sort", "redos"],
+  "extends": ["eslint:recommended", "prettier"],
+  "ignorePatterns": ["dist/"],
+  "rules": {
+    "eqeqeq": ["error", "smart"],
+    "prefer-template": "error",
+    "redos/no-vulnerable": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*ts", "*.vue"],
+      "plugins": ["@typescript-eslint"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["tsconfig.json", "tsconfig.node.json"]
+      },
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "prettier"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/prefer-optional-chain": "error",
+        "@typescript-eslint/prefer-nullish-coalescing": "error"
+      }
+    },
+    {
+      "files": ["*.vue"],
+      "parser": "vue-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".vue"]
+      },
+      "extends": [
+        "plugin:vue/vue3-recommended",
+        "plugin:vue-scoped-css/vue3-recommended",
+        "prettier"
+      ],
+      "rules": {
+        "vue/html-self-closing": [
+          "warn",
+          {
+            "html": {
+              "void": "any",
+              "normal": "always",
+              "component": "always"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
